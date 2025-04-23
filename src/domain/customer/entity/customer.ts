@@ -1,3 +1,6 @@
+import EventDispatcher from '../../@shared/event/event-dispatcher'
+import { CustomerAddressChangedEvent } from '../event/customer-address-changed.event'
+import CustomerCreatedEvent from '../event/customer-created.event'
 import Address from '../value-object/address'
 
 export default class Customer {
@@ -7,7 +10,11 @@ export default class Customer {
   private _active: boolean = false
   private _rewardPoints: number = 0
 
-  constructor(id: string, name: string) {
+  constructor(
+    id: string,
+    name: string,
+    private readonly eventDispatcher?: EventDispatcher,
+  ) {
     this._id = id
     this._name = name
     this.validate()
@@ -45,6 +52,11 @@ export default class Customer {
 
   changeAddress(address: Address) {
     this._address = address
+    if (this.eventDispatcher) {
+      this.eventDispatcher.notify(
+        new CustomerAddressChangedEvent(this.id, this.name, address.toString()),
+      )
+    }
   }
 
   isActive(): boolean {
@@ -64,5 +76,11 @@ export default class Customer {
 
   addRewardPoints(rewardPoints: number) {
     this._rewardPoints += rewardPoints
+  }
+
+  triggerCreationEvent(): void {
+    if (this.eventDispatcher) {
+      this.eventDispatcher.notify(new CustomerCreatedEvent({ id: this.id, name: this.name}))
+    }
   }
 }
