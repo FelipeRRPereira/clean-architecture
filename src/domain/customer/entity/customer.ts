@@ -26,6 +26,10 @@ export default class Customer extends Entity{
     }
   }
 
+  get getId(): string {
+    return this.id
+  }
+  
   get name(): string {
     return this._name
   }
