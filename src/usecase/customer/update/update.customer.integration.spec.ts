@@ -2,7 +2,6 @@ import { Sequelize } from 'sequelize-typescript'
 import CustomerModel from '../../../infrastructure/customer/repository/sequelize/customer.model'
 import CustomerRepository from '../../../infrastructure/customer/repository/sequelize/customer.repository'
 import UpdateCustomerUseCase from './update.customer.usecase'
-import Customer from '../../../domain/customer/entity/customer'
 import CustomerFactory from '../../../domain/customer/factory/customer.factory'
 import Address from '../../../domain/customer/value-object/address'
 
@@ -35,7 +34,7 @@ describe("Integration Test UpdateCustomerUseCase", () => {
     await customerRepository.create(customer);
 
     const updateInput = {
-      id: customer.id,
+      id: customer.getId,
       name: "Customer A Updated",
       address: {
         street: "Street A",
@@ -47,7 +46,7 @@ describe("Integration Test UpdateCustomerUseCase", () => {
 
     const output = await usecase.execute(updateInput);
     expect(output).toEqual({
-      id: customer.id,
+      id: customer.getId,
       name: "Customer A Updated",
       address: {
         street: "Street A",

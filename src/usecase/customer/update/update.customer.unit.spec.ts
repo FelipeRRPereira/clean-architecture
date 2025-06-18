@@ -13,7 +13,7 @@ const customer = CustomerFactory.createWithAddress(
 )
 
 const input = {
-  id: customer.id,
+  id: customer.getId,
   name: 'John Doe Updated',
   address: {
     street: 'Street 1 Updated',
@@ -42,7 +42,7 @@ describe('Unit test for update customer use case', () => {
     expect(repository.find).toHaveBeenCalled()
     expect(repository.update).toHaveBeenCalled()
     expect(output).toEqual({
-      id: customer.id,
+      id: customer.getId,
       name: input.name,
       address: {
         street: input.address.street,
