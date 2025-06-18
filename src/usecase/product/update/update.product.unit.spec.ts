@@ -44,7 +44,7 @@ describe("Unit Test UpdateProductUseCase", () => {
       price: 150,
     };
 
-    await expect(usecase.execute(input)).rejects.toThrow("Name is required");
+    await expect(usecase.execute(input)).rejects.toThrow("product: Name is required");
   });
 
   it("should not update a product with missing price", async () => {
@@ -60,7 +60,7 @@ describe("Unit Test UpdateProductUseCase", () => {
     };
 
     await expect(usecase.execute(input)).rejects.toThrow(
-      'Price must be greater than zero',
-    );
+      'product: Price must be greater than zero',
+    )
   });
 });

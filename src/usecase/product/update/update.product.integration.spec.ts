@@ -86,7 +86,7 @@ describe("Integration Test UpdateProductUseCase", () => {
       price: -1,
     };
 
-    await expect(usecase.execute(updateInput)).rejects.toThrow("Price must be greater than zero");
+    await expect(usecase.execute(updateInput)).rejects.toThrow("product: Price must be greater than zero");
   });
 
   it("should not update a non-existing product", async () => {
