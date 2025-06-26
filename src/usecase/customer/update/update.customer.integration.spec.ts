@@ -34,7 +34,7 @@ describe("Integration Test UpdateCustomerUseCase", () => {
     await customerRepository.create(customer);
 
     const updateInput = {
-      id: customer.getId,
+      id: customer.id,
       name: "Customer A Updated",
       address: {
         street: "Street A",
@@ -46,7 +46,7 @@ describe("Integration Test UpdateCustomerUseCase", () => {
 
     const output = await usecase.execute(updateInput);
     expect(output).toEqual({
-      id: customer.getId,
+      id: customer.id,
       name: "Customer A Updated",
       address: {
         street: "Street A",

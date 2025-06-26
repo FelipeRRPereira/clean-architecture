@@ -17,17 +17,13 @@ export default class Customer extends Entity{
     private readonly eventDispatcher?: EventDispatcher,
   ) {
     super()
-    this.id = id
+    this._id = id
     this._name = name
     this.validate()
 
     if (this.notification.hasErrors()) {
       throw new NotificationError(this.notification.getErrors())
     }
-  }
-
-  get getId(): string {
-    return this.id
   }
   
   get name(): string {

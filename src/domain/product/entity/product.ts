@@ -8,7 +8,7 @@ export default class Product extends Entity implements ProductInterface {
 
   constructor(id: string, name: string, price: number) {
     super()
-    this.id = id
+    this._id = id
     this._name = name
     this._price = price
     this.validate()
@@ -21,7 +21,7 @@ export default class Product extends Entity implements ProductInterface {
   validate(): boolean {
     this.notification.clear()
 
-    if (this.id.length === 0) {
+    if (this._id.length === 0) {
       this.notification.addError({
         context: 'product',
         message: 'Id is required',
@@ -40,10 +40,6 @@ export default class Product extends Entity implements ProductInterface {
       })
     }
     return true
-  }
-
-  get getId(): string {
-    return this.id
   }
 
   get name(): string {
