@@ -43,9 +43,9 @@ describe("Unit Test CreateProductUseCase", () => {
 
   it("should throw an error when price is missing", async () => {
     input.name = "Product 1";
-    input.price = null;
+    input.price = -1;
     await expect(usecase.execute(input)).rejects.toThrow(
-      'Price must be greater than zero',
+      'product: Price must be greater than zero',
     )
   });
 })
